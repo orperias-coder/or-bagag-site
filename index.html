@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אור בגג — השבחת גגות רעפים</title>
+<meta name="description" content="אור בגג — השבחת גגות רעפים, עבודות פח ומתכת, מרזבים, חיפויים ופאנל מבודד. גלריית פרויקטים.">
+<meta property="og:title" content="אור בגג — השבחת גגות רעפים">
+<meta property="og:description" content="גלריית פרויקטים: גגות רעפים, פח ומתכת, מרזבים, חיפויים ופאנל מבודד.">
+<meta property="og:image" content="https://orperias-coder.github.io/or-bagag-site/assets/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/logo-black.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0d0b;
+  --bg2:#161411;
+  --panel:#1d1a15;
+  --line:#2c2820;
+  --ink:#ede8df;
+  --ink-dim:#a79f8f;
+  --sun:#ffc400;
+  --sun-deep:#e8a400;
+  --slope:5vw;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Assistant',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ---------- grain ---------- */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  isolation:isolate;padding:4rem 1.5rem 9rem;
+}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(15deg, rgba(14,13,11,.97) 12%, rgba(14,13,11,.55) 45%, rgba(14,13,11,.35) 100%),
+    radial-gradient(80% 60% at 50% 100%, rgba(14,13,11,.9), transparent);
+}
+.hero-logo{width:min(300px,62vw);filter:drop-shadow(0 12px 40px rgba(0,0,0,.55));animation:rise 1.1s cubic-bezier(.19,1,.22,1) both}
+.hero h1{
+  font-family:'Frank Ruhl Libre',serif;font-weight:900;
+  font-size:clamp(2.4rem,6.5vw,4.6rem);line-height:1.08;
+  margin-top:1.2rem;animation:rise 1.1s .12s cubic-bezier(.19,1,.22,1) both;
+}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p.sub{
+  margin-top:1rem;font-size:clamp(1.05rem,2.2vw,1.35rem);color:var(--ink-dim);
+  letter-spacing:.06em;animation:rise 1.1s .24s cubic-bezier(.19,1,.22,1) both;
+}
+.hero-cta{display:flex;gap:.9rem;margin-top:2.2rem;flex-wrap:wrap;justify-content:center;animation:rise 1.1s .36s cubic-bezier(.19,1,.22,1) both}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.85rem 1.9rem;border-radius:999px;font-weight:600;font-size:1.05rem;
+  border:1px solid transparent;transition:transform .25s,box-shadow .25s,background .25s;
+}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn-sun{background:var(--sun);color:#181405;box-shadow:0 8px 30px rgba(255,196,0,.28)}
+.btn-sun:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(255,196,0,.4)}
+.btn-ghost{border-color:rgba(237,232,223,.35);color:var(--ink);background:rgba(14,13,11,.35);backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:var(--sun);color:var(--sun);transform:translateY(-2px)}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.scroll-hint{
+  position:absolute;bottom:calc(var(--slope) + 2.2rem);right:50%;transform:translateX(50%);
+  color:var(--ink-dim);font-size:.85rem;letter-spacing:.25em;animation:bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(50%,0)}50%{transform:translate(50%,8px)}}
+/* roof-slope diagonal cut */
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:var(--slope);
+  background:var(--bg);clip-path:polygon(0 100%,100% 100%,100% 0);z-index:0;
+}
+
+/* ---------- sections ---------- */
+section{padding:5rem 1.5rem}
+.wrap{max-width:1240px;margin:0 auto}
+.sec-head{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:2.6rem}
+.sec-head::after{content:"";flex:1;height:1px;background:linear-gradient(to left,var(--line),transparent)}
+.sec-head h2{
+  font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.7rem);
+  position:relative;padding-right:1.1rem;
+}
+.sec-head h2::before{
+  content:"";position:absolute;right:0;top:.18em;bottom:.14em;width:5px;
+  background:var(--sun);transform:skewY(-18deg);
+}
+.sec-head span{color:var(--ink-dim);font-size:1rem;letter-spacing:.04em}
+
+/* ---------- before/after ---------- */
+.ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr));gap:1.6rem}
+.ba{
+  position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;
+  user-select:none;touch-action:pan-y;background:var(--panel);
+  border:1px solid var(--line);
+}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .after-img{clip-path:inset(0 calc(100% - var(--cut,50%)) 0 0)}
+.ba .handle{
+  position:absolute;top:0;bottom:0;left:var(--cut,50%);width:2px;background:var(--sun);
+  transform:translateX(-1px);pointer-events:none;
+}
+.ba .handle::after{
+  content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;background:var(--sun);color:#181405;
+  display:grid;place-items:center;font-size:1.2rem;font-weight:700;
+  box-shadow:0 6px 22px rgba(0,0,0,.45);
+}
+.ba .tag{
+  position:absolute;top:.8rem;padding:.25rem .8rem;border-radius:999px;
+  font-size:.8rem;font-weight:600;background:rgba(14,13,11,.72);backdrop-filter:blur(4px);
+}
+.ba .tag.before{right:.8rem}
+.ba .tag.after{left:.8rem;background:var(--sun);color:#181405}
+.ba figcaption{
+  position:absolute;bottom:0;right:0;left:0;padding:1.4rem .9rem .6rem;font-size:.9rem;color:var(--ink);
+  background:linear-gradient(to top,rgba(14,13,11,.85),transparent);pointer-events:none;
+}
+
+/* ---------- gallery ---------- */
+#gallery{background:var(--bg2);position:relative}
+#gallery::before,#gallery::after{content:"";position:absolute;left:0;right:0;height:var(--slope)}
+#gallery::before{top:calc(-1 * var(--slope) + 1px);background:var(--bg2);clip-path:polygon(0 100%,100% 0,100% 100%)}
+#gallery::after{bottom:calc(-1 * var(--slope) + 1px);background:var(--bg2);clip-path:polygon(0 0,100% 0,0 100%)}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.2rem}
+.chip{
+  padding:.45rem 1.15rem;border-radius:999px;border:1px solid var(--line);
+  background:transparent;color:var(--ink-dim);font-family:inherit;font-size:.95rem;font-weight:400;
+  cursor:pointer;transition:all .22s;
+}
+.chip:hover{border-color:var(--sun);color:var(--ink)}
+.chip.on{background:var(--sun);border-color:var(--sun);color:#181405;font-weight:600}
+.masonry{columns:4 300px;column-gap:1rem}
+.ph{
+  break-inside:avoid;margin-bottom:1rem;border-radius:10px;overflow:hidden;
+  position:relative;cursor:pointer;border:1px solid var(--line);
+  transition:transform .3s,box-shadow .3s;background:var(--panel);
+}
+.ph:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.ph img{width:100%;transition:transform .6s cubic-bezier(.19,1,.22,1)}
+.ph:hover img{transform:scale(1.045)}
+.ph .cap{
+  position:absolute;inset-inline:0;bottom:0;padding:1.6rem .8rem .55rem;font-size:.85rem;
+  background:linear-gradient(to top,rgba(14,13,11,.88),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.ph:hover .cap{opacity:1}
+.ph.hide{display:none}
+
+/* ---------- lightbox ---------- */
+.lb{
+  position:fixed;inset:0;z-index:50;background:rgba(10,9,7,.96);
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+}
+.lb.open{display:flex}
+.lb img{max-width:94vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lb .lb-cap{margin-top:.9rem;color:var(--ink-dim);font-size:.95rem}
+.lb .lb-count{position:absolute;top:1.2rem;right:1.6rem;color:var(--ink-dim);letter-spacing:.1em}
+.lb button{
+  position:absolute;background:rgba(29,26,21,.7);border:1px solid var(--line);color:var(--ink);
+  width:48px;height:48px;border-radius:50%;font-size:1.3rem;cursor:pointer;transition:all .2s;
+  display:grid;place-items:center;
+}
+.lb button:hover{background:var(--sun);color:#181405;border-color:var(--sun)}
+.lb .x{top:1.1rem;left:1.4rem}
+.lb .nxt{right:1.2rem;top:50%;transform:translateY(-50%)}
+.lb .prv{left:1.2rem;top:50%;transform:translateY(-50%)}
+@media(max-width:640px){.lb .nxt{right:.5rem}.lb .prv{left:.5rem}}
+
+/* ---------- contact ---------- */
+#contact{text-align:center;padding-bottom:6rem}
+#contact .logo{width:170px;margin:0 auto 1.4rem;opacity:.95}
+#contact h2{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.5rem)}
+#contact .phone{
+  display:block;font-family:'Frank Ruhl Libre',serif;font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.4rem);color:var(--sun);margin:1.1rem 0 1.8rem;
+  direction:ltr;letter-spacing:.04em;
+}
+#contact .phone:hover{text-shadow:0 0 34px rgba(255,196,0,.45)}
+.foot{padding:1.6rem;text-align:center;color:var(--ink-dim);font-size:.85rem;border-top:1px solid var(--line)}
+
+/* ---------- floating whatsapp ---------- */
+.wa-float{
+  position:fixed;bottom:1.4rem;left:1.4rem;z-index:40;
+  width:60px;height:60px;border-radius:50%;background:#25d366;
+  display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.45);
+  transition:transform .25s;
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+
+/* ---------- reveal on scroll ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.19,1,.22,1)}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"><img src="assets/hero.jpg" alt="" fetchpriority="high"></div>
+  <img class="hero-logo" src="assets/logo-white.png" alt="אור בגג">
+  <h1>הגג שלכם, <em>ברמה אחרת</em></h1>
+  <p class="sub">השבחת גגות רעפים · עבודות פח ומתכת · מרזבים · חיפויים · פאנל מבודד</p>
+  <div class="hero-cta">
+    <a class="btn btn-sun" href="https://wa.me/972545725681" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.82 9.82 0 0 1 9.88 9.89c0 5.45-4.43 9.88-9.89 9.88M20.5 3.5A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.95L.05 24l6.3-1.65a11.9 11.9 0 0 0 5.7 1.45c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.44-8.4"/></svg>
+      דברו איתי בוואטסאפ
+    </a>
+    <a class="btn btn-ghost" href="tel:0545725681">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.4 21 3 13.6 3 4.5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.25 1.02l-2.22 2.2Z"/></svg>
+      054-5725681
+    </a>
+  </div>
+  <div class="scroll-hint">גללו לצפייה בעבודות ↓</div>
+</header>
+
+<section id="ba">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>לפני ואחרי</h2><span>גררו את הידית</span></div>
+    <div class="ba-grid" id="baGrid"><!--__BA__--></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>העבודות שלנו</h2><span id="galCount"></span></div>
+    <div class="chips" id="chips"></div>
+    <div class="masonry" id="masonry"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap rv">
+    <img class="logo" src="assets/logo-white.png" alt="">
+    <h2>מוזמנים לדבר איתי</h2>
+    <a class="phone" href="tel:0545725681">054-5725681</a>
+    <div class="hero-cta" style="margin-top:0">
+      <a class="btn btn-sun" href="https://wa.me/972545725681" target="_blank" rel="noopener">שלחו הודעה בוואטסאפ</a>
+    </div>
+  </div>
+</section>
+
+<div class="foot">אור בגג · השבחת גגות רעפים</div>
+
+<a class="wa-float" href="https://wa.me/972545725681" target="_blank" rel="noopener" aria-label="וואטסאפ">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.82 9.82 0 0 1 9.88 9.89c0 5.45-4.43 9.88-9.89 9.88M20.5 3.5A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.95L.05 24l6.3-1.65a11.9 11.9 0 0 0 5.7 1.45c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.44-8.4"/></svg>
+</a>
+
+<div class="lb" id="lb">
+  <span class="lb-count" id="lbCount"></span>
+  <button class="x" id="lbX" aria-label="סגירה">✕</button>
+  <button class="prv" id="lbPrev" aria-label="הקודם">‹</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <button class="nxt" id="lbNext" aria-label="הבא">›</button>
+</div>
+
+<script>
+const PHOTOS = [{f:"001.jpg",cat:"מרזבים וצינורות",note:"מרזב נחושת לאורך גג רעפים"},
+{f:"002.jpg",cat:"חיפויים וקופינג",note:"שורת רוכבים ברכס הגג, נוף לים"},
+{f:"003.jpg",cat:"גגות ופרויקטים",note:"גג רעפים — חיפה"},
+{f:"004.jpg",cat:"פאנל מבודד",note:"גג פאנל מחופה ביריעה — צילום לילה"},
+{f:"005.jpg",cat:"חיפויים וקופינג",note:"קופינג אלומיניום — זכרון יעקב"},
+{f:"006.jpg",cat:"איטום ותיקונים",note:"איטום רוכבים"},
+{f:"007.jpg",cat:"מרזבים וצינורות",note:"מרזב עגול 15 מטר בשעת שקיעה"},
+{f:"008.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית בפרגולה"},
+{f:"009.jpg",cat:"פאנל מבודד",note:"גג פאנל מבודד חדש"},
+{f:"010.jpg",cat:"גגות ופרויקטים",note:"עבודה על הגג מול הים — חיפה"},
+{f:"011.jpg",cat:"מפוחים ושבשבות",note:"שבשבות על רכס הגג"},
+{f:"012.jpg",cat:"מרזבים וצינורות",note:"מרזב נחושת — פינת גג"},
+{f:"013.jpg",cat:"גגות ופרויקטים",note:"חיפוי גגון ואיטום — מבט על הבניין"},
+{f:"014.jpg",cat:"חיפויים וקופינג",note:"קופינג לאורך מעקה הגג — חדרה"},
+{f:"015.jpg",cat:"מרזבים וצינורות",note:"מרזב אבץ בווילה מודרנית"},
+{f:"016.jpg",cat:"איטום ותיקונים",note:"גג נקי ואטום — מבט מלמעלה"},
+{f:"017.jpg",cat:"חיפויים וקופינג",note:"רוכב קופינג עם נוף לשדות"},
+{f:"018.jpg",cat:"פאנל מבודד",note:"חיפוי פאנל ביריעה — גימור קופינג"},
+{f:"019.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית וקופינג — זכרון יעקב"},
+{f:"020.jpg",cat:"מרזבים וצינורות",note:"קו גג עם מרזב אבץ"},
+{f:"021.jpg",cat:"איטום ותיקונים",note:"שילוב פאנל אלומיניום בגג קיים"},
+{f:"022.jpg",cat:"גגות ופרויקטים",note:"עבודה על גג פח — יקנעם"},
+{f:"023.jpg",cat:"חיפויים וקופינג",note:"התקנת קופינג — עבודה בשטח"},
+{f:"024.jpg",cat:"מרזבים וצינורות",note:"פיית ניקוז נחושת — תקריב"},
+{f:"025.jpg",cat:"איטום ותיקונים",note:"בידוד עליית גג"},
+{f:"026.jpg",cat:"תעלות פנימיות",note:"גג עם תעלה וקופינג — מבט רחב"},
+{f:"027.jpg",cat:"גגות ופרויקטים",note:"גג רעפים — זכרון יעקב"},
+{f:"028.jpg",cat:"פאנל מבודד",note:"קצה גג פאנל עם מרזב חדש"},
+{f:"029.jpg",cat:"חיפויים וקופינג",note:"חריץ פח במפגש גג-קיר"},
+{f:"030.jpg",cat:"מרזבים וצינורות",note:"מרזב משולב בפרגולה מודרנית"},
+{f:"031.jpg",cat:"גגות ופרויקטים",note:"עבודה על הגג"},
+{f:"032.jpg",cat:"איטום ותיקונים",note:"גג אחרי ניקוי — מבט מלמעלה"},
+{f:"033.jpg",cat:"פאנל מבודד",note:"קצה גג עם ציפוי אגרגט"},
+{f:"034.jpg",cat:"גגות ופרויקטים",note:"גג רעפים עם חלון גג"},
+{f:"035.jpg",cat:"חיפויים וקופינג",note:"פח עליון חדש במפגש גג-קיר"},
+{f:"036.jpg",cat:"מרזבים וצינורות",note:"צינור ירידה מעוצב בפרגולה"},
+{f:"037.jpg",cat:"איטום ותיקונים",note:"איטום סביב נשם — תקריב"},
+{f:"038.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית — זווית נוספת"},
+{f:"039.jpg",cat:"מפוחים ושבשבות",note:"שבשבת — תקריב"},
+{f:"040.jpg",cat:"גגות ופרויקטים",note:"עבודה בגובה — חיפה"},
+{f:"041.jpg",cat:"חיפויים וקופינג",note:"חיפוי קופסת תריס"},
+{f:"042.jpg",cat:"איטום ותיקונים",note:"איטום כיפת רוכב — תקריב"},
+{f:"043.jpg",cat:"מרזבים וצינורות",note:"מרזב אלומיניום במרפסת כניסה"},
+{f:"044.jpg",cat:"גגות ופרויקטים",note:"קו גג מעוטר — זכרון יעקב"},
+{f:"045.jpg",cat:"חיפויים וקופינג",note:"פח עליון לאורך קצה הגג — חיפה"},
+{f:"046.jpg",cat:"איטום ותיקונים",note:"איטום עמק גג ביריעה"},
+{f:"047.jpg",cat:"פאנל מבודד",note:"גג פאנל — מרזבים וסגירות"},
+{f:"048.jpg",cat:"גגות ופרויקטים",note:"איטום חלון קמור"},
+{f:"049.jpg",cat:"איטום ותיקונים",note:"רוכבים אטומים על גג נקי"},
+{f:"050.jpg",cat:"חיפויים וקופינג",note:"פח עליון — מבט מהגובה"},
+{f:"051.jpg",cat:"איטום ותיקונים",note:"איטום רוכב — עבודה מדויקת"},
+{f:"052.jpg",cat:"איטום ותיקונים",note:"תפר הלחמה — גימור מקצועי"},
+{f:"053.jpg",cat:"גגות ופרויקטים",note:"פינת גג נקייה"},
+{f:"054.jpg",cat:"מרזבים וצינורות",note:"ריתוך תפר נחושת — מלאכת יד"}];
+const PAIRS = [{before:"ba1b.jpg",after:"009.jpg",note:"החלפת גג ישן בפאנל מבודד"},
+{before:"ba2b.jpg",after:"ba2a.jpg",note:"ניקוי גג ואיטום רוכבים"},
+{before:"ba3b.jpg",after:"035.jpg",note:"חידוש מפגש גג-קיר"}];
+
+/* ---- gallery ---- */
+const masonry = document.getElementById('masonry');
+const chipsEl = document.getElementById('chips');
+const cats = ['הכול', ...new Set(PHOTOS.map(p => p.cat))];
+let filtered = PHOTOS;
+
+cats.forEach((c, i) => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (i === 0 ? ' on' : '');
+  b.textContent = c;
+  b.onclick = () => {
+    document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    filtered = c === 'הכול' ? PHOTOS : PHOTOS.filter(p => p.cat === c);
+    document.querySelectorAll('.ph').forEach((el, j) =>
+      el.classList.toggle('hide', !(c === 'הכול' || PHOTOS[j].cat === c)));
+    updateCount();
+  };
+  chipsEl.appendChild(b);
+});
+
+PHOTOS.forEach((p, i) => {
+  const d = document.createElement('div');
+  d.className = 'ph';
+  d.innerHTML = `<img src="assets/thumb/${p.f}" alt="${p.note || p.cat}" loading="lazy">
+                 <div class="cap">${p.note || ''}</div>`;
+  d.onclick = () => openLb(i);
+  masonry.appendChild(d);
+});
+
+function updateCount(){
+  document.getElementById('galCount').textContent = filtered.length + ' תמונות';
+}
+updateCount();
+
+/* ---- lightbox ---- */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+let cur = 0;
+function visibleIdx(){ return PHOTOS.map((p,i)=>i).filter(i => filtered.includes(PHOTOS[i])); }
+function openLb(i){ cur = i; renderLb(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+function step(d){
+  const vis = visibleIdx();
+  const pos = vis.indexOf(cur);
+  cur = vis[(pos + d + vis.length) % vis.length];
+  renderLb();
+}
+function renderLb(){
+  const p = PHOTOS[cur];
+  lbImg.src = 'assets/full/' + p.f;
+  document.getElementById('lbCap').textContent = p.note || p.cat;
+  const vis = visibleIdx();
+  document.getElementById('lbCount').textContent = (vis.indexOf(cur)+1) + ' / ' + vis.length;
+}
+document.getElementById('lbX').onclick = closeLb;
+document.getElementById('lbNext').onclick = () => step(1);
+document.getElementById('lbPrev').onclick = () => step(-1);
+lb.onclick = e => { if (e.target === lb) closeLb(); };
+addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(1);
+  if (e.key === 'ArrowRight') step(-1);
+});
+let tx = null;
+lb.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+lb.addEventListener('touchend', e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) step(dx > 0 ? 1 : -1);
+  tx = null;
+}, {passive:true});
+
+/* ---- before/after ---- */
+const baGrid = document.getElementById('baGrid');
+PAIRS.forEach(pr => {
+  const f = document.createElement('figure');
+  f.className = 'ba rv';
+  f.innerHTML = `
+    <img src="assets/full/${pr.before}" alt="לפני" loading="lazy">
+    <img class="after-img" src="assets/full/${pr.after}" alt="אחרי" loading="lazy">
+    <div class="handle"></div>
+    <span class="tag before">לפני</span><span class="tag after">אחרי</span>
+    ${pr.note ? `<figcaption>${pr.note}</figcaption>` : ''}`;
+  const move = x => {
+    const r = f.getBoundingClientRect();
+    const pct = Math.max(4, Math.min(96, (x - r.left) / r.width * 100));
+    f.style.setProperty('--cut', pct + '%');
+  };
+  f.addEventListener('pointerdown', e => { f.setPointerCapture(e.pointerId); move(e.clientX); });
+  f.addEventListener('pointermove', e => { if (e.buttons) move(e.clientX); });
+  baGrid.appendChild(f);
+});
+
+/* ---- reveal ---- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
