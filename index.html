@@ -10,6 +10,7 @@
 <meta property="og:image" content="https://orperias-coder.github.io/or-bagag-site/assets/og.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="assets/logo-black.png">
+<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
@@ -216,7 +217,7 @@ section{padding:5rem 1.5rem}
 <body>
 
 <header class="hero">
-  <div class="hero-bg"><img src="assets/hero.jpg" alt="" fetchpriority="high"></div>
+  <div class="hero-bg"><img src="assets/hero.webp" alt="" fetchpriority="high"></div>
   <img class="hero-logo" src="assets/logo-white.png" alt="אור בגג">
   <h1>הגג שלכם, <em>ברמה אחרת</em></h1>
   <p class="sub">השבחת גגות רעפים · עבודות פח ומתכת · מרזבים · חיפויים · פאנל מבודד</p>
@@ -275,63 +276,63 @@ section{padding:5rem 1.5rem}
 </div>
 
 <script>
-const PHOTOS = [{f:"001.jpg",cat:"מרזבים וצינורות",note:"מרזב נחושת לאורך גג רעפים"},
-{f:"002.jpg",cat:"חיפויים וקופינג",note:"שורת רוכבים ברכס הגג, נוף לים"},
-{f:"003.jpg",cat:"גגות ופרויקטים",note:"גג רעפים — חיפה"},
-{f:"004.jpg",cat:"פאנל מבודד",note:"גג פאנל מחופה ביריעה — צילום לילה"},
-{f:"005.jpg",cat:"חיפויים וקופינג",note:"קופינג אלומיניום — זכרון יעקב"},
-{f:"006.jpg",cat:"איטום ותיקונים",note:"איטום רוכבים"},
-{f:"007.jpg",cat:"מרזבים וצינורות",note:"מרזב עגול 15 מטר בשעת שקיעה"},
-{f:"008.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית בפרגולה"},
-{f:"009.jpg",cat:"פאנל מבודד",note:"גג פאנל מבודד חדש"},
-{f:"010.jpg",cat:"גגות ופרויקטים",note:"עבודה על הגג מול הים — חיפה"},
-{f:"011.jpg",cat:"מפוחים ושבשבות",note:"שבשבות על רכס הגג"},
-{f:"012.jpg",cat:"מרזבים וצינורות",note:"מרזב נחושת — פינת גג"},
-{f:"013.jpg",cat:"גגות ופרויקטים",note:"חיפוי גגון ואיטום — מבט על הבניין"},
-{f:"014.jpg",cat:"חיפויים וקופינג",note:"קופינג לאורך מעקה הגג — חדרה"},
-{f:"015.jpg",cat:"מרזבים וצינורות",note:"מרזב אבץ בווילה מודרנית"},
-{f:"016.jpg",cat:"איטום ותיקונים",note:"גג נקי ואטום — מבט מלמעלה"},
-{f:"017.jpg",cat:"חיפויים וקופינג",note:"רוכב קופינג עם נוף לשדות"},
-{f:"018.jpg",cat:"פאנל מבודד",note:"חיפוי פאנל ביריעה — גימור קופינג"},
-{f:"019.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית וקופינג — זכרון יעקב"},
-{f:"020.jpg",cat:"מרזבים וצינורות",note:"קו גג עם מרזב אבץ"},
-{f:"021.jpg",cat:"איטום ותיקונים",note:"שילוב פאנל אלומיניום בגג קיים"},
-{f:"022.jpg",cat:"גגות ופרויקטים",note:"עבודה על גג פח — יקנעם"},
-{f:"023.jpg",cat:"חיפויים וקופינג",note:"התקנת קופינג — עבודה בשטח"},
-{f:"024.jpg",cat:"מרזבים וצינורות",note:"פיית ניקוז נחושת — תקריב"},
-{f:"025.jpg",cat:"איטום ותיקונים",note:"בידוד עליית גג"},
-{f:"026.jpg",cat:"תעלות פנימיות",note:"גג עם תעלה וקופינג — מבט רחב"},
-{f:"027.jpg",cat:"גגות ופרויקטים",note:"גג רעפים — זכרון יעקב"},
-{f:"028.jpg",cat:"פאנל מבודד",note:"קצה גג פאנל עם מרזב חדש"},
-{f:"029.jpg",cat:"חיפויים וקופינג",note:"חריץ פח במפגש גג-קיר"},
-{f:"030.jpg",cat:"מרזבים וצינורות",note:"מרזב משולב בפרגולה מודרנית"},
-{f:"031.jpg",cat:"גגות ופרויקטים",note:"עבודה על הגג"},
-{f:"032.jpg",cat:"איטום ותיקונים",note:"גג אחרי ניקוי — מבט מלמעלה"},
-{f:"033.jpg",cat:"פאנל מבודד",note:"קצה גג עם ציפוי אגרגט"},
-{f:"034.jpg",cat:"גגות ופרויקטים",note:"גג רעפים עם חלון גג"},
-{f:"035.jpg",cat:"חיפויים וקופינג",note:"פח עליון חדש במפגש גג-קיר"},
-{f:"036.jpg",cat:"מרזבים וצינורות",note:"צינור ירידה מעוצב בפרגולה"},
-{f:"037.jpg",cat:"איטום ותיקונים",note:"איטום סביב נשם — תקריב"},
-{f:"038.jpg",cat:"תעלות פנימיות",note:"תעלה פנימית — זווית נוספת"},
-{f:"039.jpg",cat:"מפוחים ושבשבות",note:"שבשבת — תקריב"},
-{f:"040.jpg",cat:"גגות ופרויקטים",note:"עבודה בגובה — חיפה"},
-{f:"041.jpg",cat:"חיפויים וקופינג",note:"חיפוי קופסת תריס"},
-{f:"042.jpg",cat:"איטום ותיקונים",note:"איטום כיפת רוכב — תקריב"},
-{f:"043.jpg",cat:"מרזבים וצינורות",note:"מרזב אלומיניום במרפסת כניסה"},
-{f:"044.jpg",cat:"גגות ופרויקטים",note:"קו גג מעוטר — זכרון יעקב"},
-{f:"045.jpg",cat:"חיפויים וקופינג",note:"פח עליון לאורך קצה הגג — חיפה"},
-{f:"046.jpg",cat:"איטום ותיקונים",note:"איטום עמק גג ביריעה"},
-{f:"047.jpg",cat:"פאנל מבודד",note:"גג פאנל — מרזבים וסגירות"},
-{f:"048.jpg",cat:"גגות ופרויקטים",note:"איטום חלון קמור"},
-{f:"049.jpg",cat:"איטום ותיקונים",note:"רוכבים אטומים על גג נקי"},
-{f:"050.jpg",cat:"חיפויים וקופינג",note:"פח עליון — מבט מהגובה"},
-{f:"051.jpg",cat:"איטום ותיקונים",note:"איטום רוכב — עבודה מדויקת"},
-{f:"052.jpg",cat:"איטום ותיקונים",note:"תפר הלחמה — גימור מקצועי"},
-{f:"053.jpg",cat:"גגות ופרויקטים",note:"פינת גג נקייה"},
-{f:"054.jpg",cat:"מרזבים וצינורות",note:"ריתוך תפר נחושת — מלאכת יד"}];
-const PAIRS = [{before:"ba1b.jpg",after:"009.jpg",note:"החלפת גג ישן בפאנל מבודד"},
-{before:"ba2b.jpg",after:"ba2a.jpg",note:"ניקוי גג ואיטום רוכבים"},
-{before:"ba3b.jpg",after:"035.jpg",note:"חידוש מפגש גג-קיר"}];
+const PHOTOS = [{f:"001.webp",cat:"מרזבים וצינורות",note:"מרזב נחושת לאורך גג רעפים",r:1.777},
+{f:"002.webp",cat:"חיפויים וקופינג",note:"שורת רוכבים ברכס הגג, נוף לים",r:1.772},
+{f:"003.webp",cat:"גגות ופרויקטים",note:"גג רעפים — חיפה",r:1.777},
+{f:"004.webp",cat:"פאנל מבודד",note:"גג פאנל מחופה ביריעה — צילום לילה",r:1.772},
+{f:"005.webp",cat:"חיפויים וקופינג",note:"קופינג אלומיניום — זכרון יעקב",r:1.777},
+{f:"006.webp",cat:"איטום ותיקונים",note:"איטום רוכבים",r:1.772},
+{f:"007.webp",cat:"מרזבים וצינורות",note:"מרזב עגול 15 מטר בשעת שקיעה",r:1.777},
+{f:"008.webp",cat:"תעלות פנימיות",note:"תעלה פנימית בפרגולה",r:1.333},
+{f:"009.webp",cat:"פאנל מבודד",note:"גג פאנל מבודד חדש",r:2.222},
+{f:"010.webp",cat:"גגות ופרויקטים",note:"עבודה על הגג מול הים — חיפה",r:0.753},
+{f:"011.webp",cat:"מפוחים ושבשבות",note:"שבשבות על רכס הגג",r:1.333},
+{f:"012.webp",cat:"מרזבים וצינורות",note:"מרזב נחושת — פינת גג",r:1.772},
+{f:"013.webp",cat:"גגות ופרויקטים",note:"חיפוי גגון ואיטום — מבט על הבניין",r:1.777},
+{f:"014.webp",cat:"חיפויים וקופינג",note:"קופינג לאורך מעקה הגג — חדרה",r:1.777},
+{f:"015.webp",cat:"מרזבים וצינורות",note:"מרזב אבץ בווילה מודרנית",r:1.777},
+{f:"016.webp",cat:"איטום ותיקונים",note:"גג נקי ואטום — מבט מלמעלה",r:1.777},
+{f:"017.webp",cat:"חיפויים וקופינג",note:"רוכב קופינג עם נוף לשדות",r:1.777},
+{f:"018.webp",cat:"פאנל מבודד",note:"חיפוי פאנל ביריעה — גימור קופינג",r:1.772},
+{f:"019.webp",cat:"תעלות פנימיות",note:"תעלה פנימית וקופינג — זכרון יעקב",r:0.562},
+{f:"020.webp",cat:"מרזבים וצינורות",note:"קו גג עם מרזב אבץ",r:1.777},
+{f:"021.webp",cat:"איטום ותיקונים",note:"שילוב פאנל אלומיניום בגג קיים",r:1.772},
+{f:"022.webp",cat:"גגות ופרויקטים",note:"עבודה על גג פח — יקנעם",r:1.328},
+{f:"023.webp",cat:"חיפויים וקופינג",note:"התקנת קופינג — עבודה בשטח",r:1.772},
+{f:"024.webp",cat:"מרזבים וצינורות",note:"פיית ניקוז נחושת — תקריב",r:0.562},
+{f:"025.webp",cat:"איטום ותיקונים",note:"בידוד עליית גג",r:1.777},
+{f:"026.webp",cat:"תעלות פנימיות",note:"גג עם תעלה וקופינג — מבט רחב",r:1.772},
+{f:"027.webp",cat:"גגות ופרויקטים",note:"גג רעפים — זכרון יעקב",r:0.753},
+{f:"028.webp",cat:"פאנל מבודד",note:"קצה גג פאנל עם מרזב חדש",r:2.222},
+{f:"029.webp",cat:"חיפויים וקופינג",note:"חריץ פח במפגש גג-קיר",r:1.772},
+{f:"030.webp",cat:"מרזבים וצינורות",note:"מרזב משולב בפרגולה מודרנית",r:0.564},
+{f:"031.webp",cat:"גגות ופרויקטים",note:"עבודה על הגג",r:2.357},
+{f:"032.webp",cat:"איטום ותיקונים",note:"גג אחרי ניקוי — מבט מלמעלה",r:0.562},
+{f:"033.webp",cat:"פאנל מבודד",note:"קצה גג עם ציפוי אגרגט",r:1.333},
+{f:"034.webp",cat:"גגות ופרויקטים",note:"גג רעפים עם חלון גג",r:0.753},
+{f:"035.webp",cat:"חיפויים וקופינג",note:"פח עליון חדש במפגש גג-קיר",r:1.777},
+{f:"036.webp",cat:"מרזבים וצינורות",note:"צינור ירידה מעוצב בפרגולה",r:0.750},
+{f:"037.webp",cat:"איטום ותיקונים",note:"איטום סביב נשם — תקריב",r:1.777},
+{f:"038.webp",cat:"תעלות פנימיות",note:"תעלה פנימית — זווית נוספת",r:0.750},
+{f:"039.webp",cat:"מפוחים ושבשבות",note:"שבשבת — תקריב",r:1.333},
+{f:"040.webp",cat:"גגות ופרויקטים",note:"עבודה בגובה — חיפה",r:0.753},
+{f:"041.webp",cat:"חיפויים וקופינג",note:"חיפוי קופסת תריס",r:0.450},
+{f:"042.webp",cat:"איטום ותיקונים",note:"איטום כיפת רוכב — תקריב",r:1.777},
+{f:"043.webp",cat:"מרזבים וצינורות",note:"מרזב אלומיניום במרפסת כניסה",r:0.562},
+{f:"044.webp",cat:"גגות ופרויקטים",note:"קו גג מעוטר — זכרון יעקב",r:0.753},
+{f:"045.webp",cat:"חיפויים וקופינג",note:"פח עליון לאורך קצה הגג — חיפה",r:1.777},
+{f:"046.webp",cat:"איטום ותיקונים",note:"איטום עמק גג ביריעה",r:0.562},
+{f:"047.webp",cat:"פאנל מבודד",note:"גג פאנל — מרזבים וסגירות",r:1.333},
+{f:"048.webp",cat:"גגות ופרויקטים",note:"איטום חלון קמור",r:0.564},
+{f:"049.webp",cat:"איטום ותיקונים",note:"רוכבים אטומים על גג נקי",r:1.772},
+{f:"050.webp",cat:"חיפויים וקופינג",note:"פח עליון — מבט מהגובה",r:0.564},
+{f:"051.webp",cat:"איטום ותיקונים",note:"איטום רוכב — עבודה מדויקת",r:0.562},
+{f:"052.webp",cat:"איטום ותיקונים",note:"תפר הלחמה — גימור מקצועי",r:0.562},
+{f:"053.webp",cat:"גגות ופרויקטים",note:"פינת גג נקייה",r:1.772},
+{f:"054.webp",cat:"מרזבים וצינורות",note:"ריתוך תפר נחושת — מלאכת יד",r:0.562}];
+const PAIRS = [{before:"ba1b.webp",after:"009.webp",note:"החלפת גג ישן בפאנל מבודד"},
+{before:"ba2b.webp",after:"ba2a.webp",note:"ניקוי גג ואיטום רוכבים"},
+{before:"ba3b.webp",after:"035.webp",note:"חידוש מפגש גג-קיר"}];
 
 /* ---- gallery ---- */
 const masonry = document.getElementById('masonry');
@@ -357,7 +358,7 @@ cats.forEach((c, i) => {
 PHOTOS.forEach((p, i) => {
   const d = document.createElement('div');
   d.className = 'ph';
-  d.innerHTML = `<img src="assets/thumb/${p.f}" alt="${p.note || p.cat}" loading="lazy">
+  d.innerHTML = `<img src="assets/thumb/${p.f}" alt="${p.note || p.cat}" loading="lazy" decoding="async" style="aspect-ratio:${p.r || 'auto'}">
                  <div class="cap">${p.note || ''}</div>`;
   d.onclick = () => openLb(i);
   masonry.appendChild(d);
@@ -382,10 +383,18 @@ function step(d){
 }
 function renderLb(){
   const p = PHOTOS[cur];
-  lbImg.src = 'assets/full/' + p.f;
-  document.getElementById('lbCap').textContent = p.note || p.cat;
+  lbImg.src = 'assets/thumb/' + p.f;
+  const full = new Image();
+  full.src = 'assets/full/' + p.f;
+  full.onload = () => { if (PHOTOS[cur] === p) lbImg.src = full.src; };
+  document.getElementById('lbCap').textContent = (p.note || p.cat) + '  ·  #' + p.f.replace(/\D/g, '');
   const vis = visibleIdx();
   document.getElementById('lbCount').textContent = (vis.indexOf(cur)+1) + ' / ' + vis.length;
+  [1, -1].forEach(d => {
+    const pos = vis.indexOf(cur);
+    const n = PHOTOS[vis[(pos + d + vis.length) % vis.length]];
+    if (n && n !== p) new Image().src = 'assets/full/' + n.f;
+  });
 }
 document.getElementById('lbX').onclick = closeLb;
 document.getElementById('lbNext').onclick = () => step(1);
