@@ -7,10 +7,11 @@
 <meta name="description" content="אור בגג — השבחת גגות רעפים, עבודות פח ומתכת, מרזבים, חיפויים ופאנל מבודד. גלריית פרויקטים.">
 <meta property="og:title" content="אור בגג — השבחת גגות רעפים">
 <meta property="og:description" content="גלריית פרויקטים: גגות רעפים, פח ומתכת, מרזבים, חיפויים ופאנל מבודד.">
-<meta property="og:image" content="https://orperias-coder.github.io/or-bagag-site/assets/og.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/og.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="assets/logo-black.png">
-<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/hero.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
@@ -217,8 +218,8 @@ section{padding:5rem 1.5rem}
 <body>
 
 <header class="hero">
-  <div class="hero-bg"><img src="assets/hero.webp" alt="" fetchpriority="high"></div>
-  <img class="hero-logo" src="assets/logo-white.png" alt="אור בגג">
+  <div class="hero-bg"><img src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/hero.webp" alt="" fetchpriority="high"></div>
+  <img class="hero-logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-white.png" alt="אור בגג">
   <h1>הגג שלכם, <em>ברמה אחרת</em></h1>
   <p class="sub">השבחת גגות רעפים · עבודות פח ומתכת · מרזבים · חיפויים · פאנל מבודד</p>
   <div class="hero-cta">
@@ -251,7 +252,7 @@ section{padding:5rem 1.5rem}
 
 <section id="contact">
   <div class="wrap rv">
-    <img class="logo" src="assets/logo-white.png" alt="">
+    <img class="logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-white.png" alt="">
     <h2>מוזמנים לדבר איתי</h2>
     <a class="phone" href="tel:0545725681">054-5725681</a>
     <div class="hero-cta" style="margin-top:0">
@@ -276,6 +277,7 @@ section{padding:5rem 1.5rem}
 </div>
 
 <script>
+const ASSET = 'https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/';
 const PHOTOS = [{f:"001.webp",cat:"מרזבים וצינורות",note:"מרזב נחושת לאורך גג רעפים",r:1.777},
 {f:"002.webp",cat:"חיפויים וקופינג",note:"שורת רוכבים ברכס הגג, נוף לים",r:1.772},
 {f:"003.webp",cat:"גגות ופרויקטים",note:"גג רעפים — חיפה",r:1.777},
@@ -363,7 +365,7 @@ cats.forEach((c, i) => {
 PHOTOS.forEach((p, i) => {
   const d = document.createElement('div');
   d.className = 'ph';
-  d.innerHTML = `<img src="assets/thumb/${p.f}" alt="${p.note || p.cat}" loading="lazy" decoding="async" style="aspect-ratio:${p.r || 'auto'}">
+  d.innerHTML = `<img src="${ASSET}thumb/${p.f}" alt="${p.note || p.cat}" loading="lazy" decoding="async" style="aspect-ratio:${p.r || 'auto'}">
                  <div class="cap">${p.note || ''}</div>`;
   d.onclick = () => openLb(i);
   masonry.appendChild(d);
@@ -388,9 +390,9 @@ function step(d){
 }
 function renderLb(){
   const p = PHOTOS[cur];
-  lbImg.src = 'assets/thumb/' + p.f;
+  lbImg.src = ASSET + 'thumb/' + p.f;
   const full = new Image();
-  full.src = 'assets/full/' + p.f;
+  full.src = ASSET + 'full/' + p.f;
   full.onload = () => { if (PHOTOS[cur] === p) lbImg.src = full.src; };
   document.getElementById('lbCap').textContent = (p.note || p.cat) + '  ·  #' + p.f.replace(/\D/g, '');
   const vis = visibleIdx();
@@ -398,7 +400,7 @@ function renderLb(){
   [1, -1].forEach(d => {
     const pos = vis.indexOf(cur);
     const n = PHOTOS[vis[(pos + d + vis.length) % vis.length]];
-    if (n && n !== p) new Image().src = 'assets/full/' + n.f;
+    if (n && n !== p) new Image().src = ASSET + 'full/' + n.f;
   });
 }
 document.getElementById('lbX').onclick = closeLb;
@@ -426,8 +428,8 @@ PAIRS.forEach(pr => {
   const f = document.createElement('figure');
   f.className = 'ba rv';
   f.innerHTML = `
-    <img src="assets/full/${pr.before}" alt="לפני" loading="lazy">
-    <img class="after-img" src="assets/full/${pr.after}" alt="אחרי" loading="lazy">
+    <img src="${ASSET}full/${pr.before}" alt="לפני" loading="lazy">
+    <img class="after-img" src="${ASSET}full/${pr.after}" alt="אחרי" loading="lazy">
     <div class="handle"></div>
     <span class="tag before">לפני</span><span class="tag after">אחרי</span>
     ${pr.note ? `<figcaption>${pr.note}</figcaption>` : ''}`;

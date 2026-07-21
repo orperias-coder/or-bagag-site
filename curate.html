@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סינון תמונות — אור בגג</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--bg:#0e0d0b;--panel:#1d1a15;--line:#2c2820;--ink:#ede8df;--dim:#a79f8f;--sun:#ffc400;--del:#e5484d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,'Assistant',sans-serif;padding-bottom:90px}
+header{padding:1.2rem 1rem .4rem;text-align:center}
+header h1{font-size:1.3rem}
+header p{color:var(--dim);font-size:.9rem;margin-top:.35rem;line-height:1.5}
+header b.x{color:var(--del)} header b.h{color:var(--sun)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;padding:1rem}
+.t{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--line);cursor:pointer;background:var(--panel)}
+.t img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.t .n{position:absolute;top:.3rem;right:.3rem;background:rgba(0,0,0,.75);color:var(--sun);font-weight:700;font-size:.85rem;padding:.1rem .45rem;border-radius:6px}
+.t .cat{position:absolute;bottom:0;left:0;right:0;font-size:.68rem;color:#ddd;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);padding:.8rem .35rem .25rem;pointer-events:none}
+.t .mark{position:absolute;inset:0;display:none;place-items:center;font-size:3rem;font-weight:900}
+.t.del{border-color:var(--del)}
+.t.del .mark{display:grid;background:rgba(229,72,77,.4);color:#fff}
+.t.fav{border-color:var(--sun)}
+.t.fav .mark{display:grid;background:rgba(255,196,0,.25);color:var(--sun)}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#141210f2;border-top:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;flex-wrap:wrap}
+.bar .st{flex:1;font-size:.95rem;min-width:150px}
+.bar button{border:none;border-radius:999px;padding:.6rem 1.2rem;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit}
+#copy{background:var(--sun)}
+#reset{background:transparent;color:var(--dim);border:1px solid var(--line)}
+#toast{position:fixed;bottom:95px;right:50%;transform:translateX(50%);background:var(--sun);color:#181405;padding:.6rem 1.3rem;border-radius:999px;font-weight:600;display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>סינון תמונות האתר</h1>
+  <p>לחיצה אחת = <b class="x">✗ למחוק</b> · לחיצה שנייה = <b class="h">★ מועדפת</b> · שלישית = ניקוי.<br>בסוף לחץ "העתק סיכום" ושלח לי את הטקסט בצ'אט.</p>
+</header>
+<div class="grid" id="grid"></div>
+<div class="bar">
+  <div class="st" id="st"></div>
+  <button id="copy">העתק סיכום</button>
+  <button id="reset">אפס הכול</button>
+</div>
+<div id="toast">הועתק! הדבק לי בצ'אט</div>
+<script src="assets/data.js"></script>
+<script>
+const CDN = 'https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/';
+const KEY = 'or-bagag-curate';
+let marks = JSON.parse(localStorage.getItem(KEY) || '{}');
+const grid = document.getElementById('grid');
+
+CPHOTOS.forEach(p => {
+  const id = p.f.replace(/\D/g, '');
+  const d = document.createElement('div');
+  d.className = 't ' + (marks[id] || '');
+  d.innerHTML = `<img src="${CDN}thumb/${p.f}" loading="lazy" alt="">
+    <span class="n">#${id}</span><span class="cat">${p.cat}</span>
+    <span class="mark">${marks[id] === 'fav' ? '★' : '✗'}</span>`;
+  d.onclick = () => {
+    const cur = marks[id];
+    const next = !cur ? 'del' : cur === 'del' ? 'fav' : '';
+    if (next) marks[id] = next; else delete marks[id];
+    d.className = 't ' + (next || '');
+    d.querySelector('.mark').textContent = next === 'fav' ? '★' : '✗';
+    save();
+  };
+  grid.appendChild(d);
+});
+
+function save(){
+  localStorage.setItem(KEY, JSON.stringify(marks));
+  const del = Object.keys(marks).filter(k => marks[k] === 'del');
+  const fav = Object.keys(marks).filter(k => marks[k] === 'fav');
+  document.getElementById('st').textContent = `✗ למחוק: ${del.length} · ★ מועדפות: ${fav.length}`;
+}
+save();
+
+document.getElementById('copy').onclick = () => {
+  const del = Object.keys(marks).filter(k => marks[k] === 'del').sort((a,b)=>a-b);
+  const fav = Object.keys(marks).filter(k => marks[k] === 'fav').sort((a,b)=>a-b);
+  let txt = 'סינון תמונות לאתר:\n';
+  if (del.length) txt += 'למחוק: ' + del.join(', ') + '\n';
+  if (fav.length) txt += 'מועדפות: ' + fav.join(', ') + '\n';
+  if (!del.length && !fav.length) txt += '(אין סימונים)';
+  navigator.clipboard.writeText(txt).then(() => {
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 2200);
+  });
+};
+document.getElementById('reset').onclick = () => {
+  if (confirm('לאפס את כל הסימונים?')) { marks = {}; save(); location.reload(); }
+};
+</script>
+</body>
+</html>
