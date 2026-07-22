@@ -50,8 +50,8 @@ const KEY = 'or-bagag-curate';
 let marks = JSON.parse(localStorage.getItem(KEY) || '{}');
 const grid = document.getElementById('grid');
 
-CPHOTOS.forEach(p => {
-  const id = p.f.replace(/\D/g, '');
+CPHOTOS.forEach((p, idx) => {
+  const id = String(idx + 1);
   const d = document.createElement('div');
   d.className = 't ' + (marks[id] || '');
   d.innerHTML = `<img src="${CDN}thumb/${p.f}" loading="lazy" alt="">
