@@ -108,42 +108,31 @@ section{padding:5rem 1.5rem}
 }
 .sec-head span{color:var(--ink-dim);font-size:1rem;letter-spacing:.04em}
 
-/* ---------- before/after ---------- */
-.ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr));gap:1.6rem}
-.ba{
-  position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;
-  user-select:none;touch-action:pan-y;background:var(--panel);
-  border:1px solid var(--line);
-}
-.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
-.ba .after-img{clip-path:inset(0 calc(100% - var(--cut,50%)) 0 0)}
-.ba .handle{
-  position:absolute;top:0;bottom:0;left:var(--cut,50%);width:2px;background:var(--sun);
-  transform:translateX(-1px);pointer-events:none;
-}
-.ba .handle::after{
-  content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:44px;height:44px;border-radius:50%;background:var(--sun);color:#181405;
-  display:grid;place-items:center;font-size:1.2rem;font-weight:700;
-  box-shadow:0 6px 22px rgba(0,0,0,.45);
-}
-.ba .tag{
-  position:absolute;top:.8rem;padding:.25rem .8rem;border-radius:999px;
-  font-size:.8rem;font-weight:600;background:rgba(14,13,11,.72);backdrop-filter:blur(4px);
-}
-.ba .tag.before{right:.8rem}
-.ba .tag.after{left:.8rem;background:var(--sun);color:#181405}
-.ba figcaption{
-  position:absolute;bottom:0;right:0;left:0;padding:1.4rem .9rem .6rem;font-size:.9rem;color:var(--ink);
-  background:linear-gradient(to top,rgba(14,13,11,.85),transparent);pointer-events:none;
-}
+/* ---------- featured carousel ---------- */
+#feat{padding:5rem 0 3.5rem}
+#feat .sec-head{margin-bottom:2rem}
+.car{position:relative;height:min(72vh,620px);overflow:hidden;background:var(--panel)}
+.car .slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;pointer-events:none;cursor:pointer}
+.car .slide.on{opacity:1;pointer-events:auto}
+.car .slide img{width:100%;height:100%;object-fit:cover}
+.car .slide.on img{animation:kb 8s ease-out both}
+@keyframes kb{from{transform:scale(1.07)}to{transform:scale(1)}}
+.car .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,13,11,.78),transparent 42%)}
+.car .cap{position:absolute;bottom:2.8rem;right:1.8rem;left:1.8rem;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:clamp(1.15rem,2.6vw,1.8rem);text-shadow:0 2px 16px rgba(0,0,0,.65)}
+.car .nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;border:1px solid rgba(237,232,223,.3);background:rgba(14,13,11,.45);backdrop-filter:blur(6px);color:var(--ink);font-size:1.5rem;cursor:pointer;display:grid;place-items:center;transition:all .2s;z-index:3}
+.car .nav:hover{background:var(--sun);color:#181405;border-color:var(--sun)}
+.car .prevb{right:1rem}.car .nextb{left:1rem}
+.car .dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.45rem;z-index:3}
+.car .dots b{width:8px;height:8px;border-radius:999px;background:rgba(237,232,223,.35);cursor:pointer;transition:all .25s}
+.car .dots b.on{background:var(--sun);width:22px}
+@media(max-width:640px){.car{height:56vh}.car .nav{width:42px;height:42px}}
 
 /* ---------- gallery ---------- */
 #gallery{background:var(--bg2);position:relative}
 #gallery::before,#gallery::after{content:"";position:absolute;left:0;right:0;height:var(--slope)}
 #gallery::before{top:calc(-1 * var(--slope) + 1px);background:var(--bg2);clip-path:polygon(0 100%,100% 0,100% 100%)}
 #gallery::after{bottom:calc(-1 * var(--slope) + 1px);background:var(--bg2);clip-path:polygon(0 0,100% 0,0 100%)}
-.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.2rem;position:sticky;top:0;z-index:6;background:rgba(22,20,17,.92);backdrop-filter:blur(10px);padding:.85rem .2rem;border-radius:0 0 12px 12px}
 .chip{
   padding:.45rem 1.15rem;border-radius:999px;border:1px solid var(--line);
   background:transparent;color:var(--ink-dim);font-family:inherit;font-size:.95rem;font-weight:400;
@@ -175,7 +164,7 @@ section{padding:5rem 1.5rem}
   display:none;align-items:center;justify-content:center;flex-direction:column;
 }
 .lb.open{display:flex}
-.lb img{max-width:94vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lb img{max-width:94vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,.6);transition:opacity .28s ease}
 .lb .lb-cap{margin-top:.9rem;color:var(--ink-dim);font-size:.95rem}
 .lb .lb-count{position:absolute;top:1.2rem;right:1.6rem;color:var(--ink-dim);letter-spacing:.1em}
 .lb button{
@@ -236,11 +225,9 @@ section{padding:5rem 1.5rem}
   <div class="scroll-hint">גללו לצפייה בעבודות ↓</div>
 </header>
 
-<section id="ba">
-  <div class="wrap">
-    <div class="sec-head rv"><h2>לפני ואחרי</h2><span>גררו את הידית</span></div>
-    <div class="ba-grid" id="baGrid"><!--__BA__--></div>
-  </div>
+<section id="feat">
+  <div class="wrap"><div class="sec-head rv"><h2>המיוחדים שלנו</h2><span>פרויקטים שאנחנו גאים בהם</span></div></div>
+  <div class="car" id="car"></div>
 </section>
 
 <section id="gallery">
@@ -321,7 +308,7 @@ const PHOTOS = [{f:"494f3cfc358f.webp",cat:"עבודות מיוחדות",note:"�
 {f:"b681536db9bc.webp",cat:"מרזבים וצינורות",note:"צינור ניקוז חיצוני מאלומיניום.",r:0.753},
 {f:"202666d4ec00.webp",cat:"איטום ותיקונים",note:"חידוש ואיטום רוכבים",r:1.328},
 {f:"a8b441908739.webp",cat:"פאנל מבודד",note:"סגירת צד בגג פאנל מבודד",r:0.753},
-{f:"a1ac0b52b694.webp",cat:"פאנל מבודד",note:"גג פאנל תפר-עומד  ",r:1.328,pri:1},
+{f:"a1ac0b52b694.webp",cat:"פאנל מבודד",note:"גג פאנל תפר-עומד  ",r:1.328,pri:1,fav:1},
 {f:"b06a0a94b4ec.webp",cat:"פאנל מבודד",note:"גג פאנל תפר-עומד  ",r:1.328},
 {f:"b100fedcf035.webp",cat:"פאנל מבודד",note:"גג פאנל תפר-עומד  ",r:1.328},
 {f:"8b9d7d13f904.webp",cat:"גגות ופרויקטים",note:"",r:1.328},
@@ -337,7 +324,7 @@ const PHOTOS = [{f:"494f3cfc358f.webp",cat:"עבודות מיוחדות",note:"�
 {f:"a83e217488d9.webp",cat:"פאנל מבודד",note:"גג פאנל תפר עומד עם סגירה היקפית",r:1.328},
 {f:"88a74f6ae44c.webp",cat:"פאנל מבודד",note:"סגירת מפגש קיר בגג פאנל מבודד",r:1.328},
 {f:"bd1ceaa819a9.webp",cat:"איטום ותיקונים",note:"איטום רכס רעפים",r:0.753},
-{f:"9b06d425a40f.webp",cat:"איטום ותיקונים",note:"איטום רכס רעפים",r:1.328,pri:1},
+{f:"9b06d425a40f.webp",cat:"איטום ותיקונים",note:"איטום רכס רעפים",r:1.328,pri:1,fav:1},
 {f:"b894348a37ab.webp",cat:"איטום ותיקונים",note:"איטום רכס רעפים",r:1.328},
 {f:"929fe8493202.webp",cat:"חיפויים וקופינג",note:"מפגש קופינג בין 4 קורות עם תפר מכאני",r:0.753},
 {f:"18800322d9c6.webp",cat:"חיפויים וקופינג",note:"מפגש קופינג עם תפר מכאני",r:1.328},
@@ -357,7 +344,7 @@ const PHOTOS = [{f:"494f3cfc358f.webp",cat:"עבודות מיוחדות",note:"�
 {f:"0f1624a76dd1.webp",cat:"מרזבים וצינורות",note:"תעלת אלומיניום עם רצועות מתיחה",r:0.753},
 {f:"76e33fbc6d0e.webp",cat:"גגות ופרויקטים",note:"סגירת מפגש רעפים עם קיר",r:0.753},
 {f:"9fa2c88485bf.webp",cat:"פאנל מבודד",note:"סגירת מפגש פאנל מבודד עם קיר אבן",r:1.772},
-{f:"e80c05b371e8.webp",cat:"פאנל מבודד",note:"סגירת מפגש פאנל מבודד עם קיר אבן",r:1.772,pri:1},
+{f:"e80c05b371e8.webp",cat:"פאנל מבודד",note:"סגירת מפגש פאנל מבודד עם קיר אבן",r:1.772,pri:1,fav:1},
 {f:"145d406d463a.webp",cat:"פאנל מבודד",note:"סגירת מפגש פאנל מבודד עם קיר אבן",r:1.777},
 {f:"2935d7a2f698.webp",cat:"חיפויים וקופינג",note:"חיפוי חזית ארגז רוח דולף - מבט מבחוץ",r:1.777},
 {f:"263e403f37cc.webp",cat:"חיפויים וקופינג",note:"חיפוי חזית ארגז רוח דולף - מבט מבפנים",r:1.777},
@@ -368,7 +355,7 @@ const PHOTOS = [{f:"494f3cfc358f.webp",cat:"עבודות מיוחדות",note:"�
 {f:"14eaf0089b4d.webp",cat:"מרזבים וצינורות",note:"מרזב חצי עגול חום בפרגולה וגג רעפים",r:0.564},
 {f:"2400e45de0c4.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777},
 {f:"a379fc0e7373.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777},
-{f:"29b68b5ee42d.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777,pri:1},
+{f:"29b68b5ee42d.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777,pri:1,fav:1},
 {f:"d0dfb48d7191.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777},
 {f:"b29feaa5a143.webp",cat:"עבודות מיוחדות",note:"סגירת חזית קורות גג חשופות",r:1.777},
 {f:"a37d45a60d37.webp",cat:"מרזבים וצינורות",note:"מרזב מותאם עם שיפוע בנוי בפרגולה",r:1.777},
@@ -399,9 +386,6 @@ const PHOTOS = [{f:"494f3cfc358f.webp",cat:"עבודות מיוחדות",note:"�
 {f:"af2d64e1e823.webp",cat:"מרזבים וצינורות",note:"מרזב אבץ חצי עגול",r:1.777},
 {f:"09d39b9543b7.webp",cat:"מרזבים וצינורות",note:"מרזב משולב בפרגולה מודרנית",r:1.777},
 {f:"07f1e4023b5e.webp",cat:"עבודות מיוחדות",note:"תעלה מותאמת אישית לאיסוף מי ניקוז מאדנית בחניה",r:1.772}];
-const PAIRS = [{before:"1b9a9fe0da7a.webp",after:"f2f52fe4bdbc.webp",note:"החלפת גג ישן בפאנל מבודד"},
-{before:"b568d7cb162f.webp",after:"e10226d5d99c.webp",note:"ניקוי גג ואיטום רוכבים"},
-{before:"f9d55f2f885b.webp",after:"a78252b8a20f.webp",note:"חידוש מפגש גג-קיר"}];
 
 /* ---- gallery ---- */
 const masonry = document.getElementById('masonry');
@@ -451,7 +435,9 @@ function step(d){
   const vis = visibleIdx();
   const pos = vis.indexOf(cur);
   cur = vis[(pos + d + vis.length) % vis.length];
+  lbImg.style.opacity = .3;
   renderLb();
+  requestAnimationFrame(() => requestAnimationFrame(() => lbImg.style.opacity = 1));
 }
 function renderLb(){
   const p = PHOTOS[cur];
@@ -487,26 +473,55 @@ lb.addEventListener('touchend', e => {
   tx = null;
 }, {passive:true});
 
-/* ---- before/after ---- */
-const baGrid = document.getElementById('baGrid');
-PAIRS.forEach(pr => {
-  const f = document.createElement('figure');
-  f.className = 'ba rv';
-  f.innerHTML = `
-    <img src="${ASSET}full/${pr.before}" alt="לפני" loading="lazy">
-    <img class="after-img" src="${ASSET}full/${pr.after}" alt="אחרי" loading="lazy">
-    <div class="handle"></div>
-    <span class="tag before">לפני</span><span class="tag after">אחרי</span>
-    ${pr.note ? `<figcaption>${pr.note}</figcaption>` : ''}`;
-  const move = x => {
-    const r = f.getBoundingClientRect();
-    const pct = Math.max(4, Math.min(96, (x - r.left) / r.width * 100));
-    f.style.setProperty('--cut', pct + '%');
-  };
-  f.addEventListener('pointerdown', e => { f.setPointerCapture(e.pointerId); move(e.clientX); });
-  f.addEventListener('pointermove', e => { if (e.buttons) move(e.clientX); });
-  baGrid.appendChild(f);
-});
+/* ---- featured carousel ---- */
+const FEATS = PHOTOS.map((p, i) => ({p, i})).filter(x => x.p.fav);
+const car = document.getElementById('car');
+if (FEATS.length >= 2) {
+  let ci = 0, timer = null;
+  FEATS.forEach((x, k) => {
+    const s = document.createElement('div');
+    s.className = 'slide' + (k === 0 ? ' on' : '');
+    s.innerHTML = `<img src="${ASSET}full/${x.p.f}" ${k === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} alt="">
+      <div class="shade"></div><div class="cap">${x.p.note || ''}</div>`;
+    s.onclick = () => openLb(x.i);
+    car.appendChild(s);
+  });
+  const dots = document.createElement('div');
+  dots.className = 'dots';
+  FEATS.forEach((_, k) => {
+    const b = document.createElement('b');
+    if (!k) b.className = 'on';
+    b.onclick = e => { e.stopPropagation(); go(k); };
+    dots.appendChild(b);
+  });
+  car.appendChild(dots);
+  [['prevb', 1], ['nextb', -1]].forEach(([cls, d]) => {
+    const b = document.createElement('button');
+    b.className = 'nav ' + cls;
+    b.textContent = d === 1 ? '‹' : '›';
+    b.setAttribute('aria-label', d === 1 ? 'הבא' : 'הקודם');
+    b.onclick = e => { e.stopPropagation(); go(ci + d); };
+    car.appendChild(b);
+  });
+  function go(k){
+    ci = (k + FEATS.length) % FEATS.length;
+    car.querySelectorAll('.slide').forEach((el, j) => el.classList.toggle('on', j === ci));
+    dots.querySelectorAll('b').forEach((el, j) => el.classList.toggle('on', j === ci));
+    restart();
+  }
+  function restart(){ clearInterval(timer); timer = setInterval(() => go(ci + 1), 5500); }
+  restart();
+  let cx = null;
+  car.addEventListener('touchstart', e => { cx = e.touches[0].clientX; clearInterval(timer); }, {passive: true});
+  car.addEventListener('touchend', e => {
+    if (cx === null) return;
+    const dx = e.changedTouches[0].clientX - cx;
+    if (Math.abs(dx) > 50) go(ci + (dx > 0 ? 1 : -1)); else restart();
+    cx = null;
+  }, {passive: true});
+} else {
+  document.getElementById('feat').style.display = 'none';
+}
 
 /* ---- reveal ---- */
 const io = new IntersectionObserver(es => es.forEach(e => {
