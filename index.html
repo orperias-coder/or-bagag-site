@@ -110,6 +110,7 @@ section{padding:5rem 1.5rem}
 
 /* ---------- featured carousel ---------- */
 #feat{padding:5rem 0 3.5rem}
+#feat .wrap{padding:0 1.5rem}
 #feat .sec-head{margin-bottom:2rem}
 .car{position:relative;height:min(72vh,620px);overflow:hidden;background:var(--panel)}
 .car .slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;pointer-events:none;cursor:pointer}
@@ -247,7 +248,7 @@ section{padding:5rem 1.5rem}
 </header>
 
 <section id="feat">
-  <div class="wrap"><div class="sec-head rv"><h2>המיוחדים שלנו</h2><span>פרויקטים שאנחנו גאים בהם</span></div></div>
+  <div class="wrap"><div class="sec-head rv"><h2>עבודות נבחרות</h2><span>פרויקטים שאני גאה בהם</span></div></div>
   <div class="car" id="car"></div>
 </section>
 
@@ -499,6 +500,7 @@ lb.addEventListener('touchend', e => {
 /* ---- zoom & pan (הגדלה בלחיצה, פינץ' וגרירה — בלי לאבד סגירה/חצים) ---- */
 const ZMAX = 4;
 let zs = 1, ztx = 0, zty = 0, zPinch = null, zDrag = null, zGesture = false;
+let zTouch = false, zMoved = false, zStart = null, zLastTap = 0;
 function zApply(anim){
   const mx = (zs - 1) * lbImg.offsetWidth / 2, my = (zs - 1) * lbImg.offsetHeight / 2;
   ztx = Math.max(-mx, Math.min(mx, ztx));
@@ -507,34 +509,44 @@ function zApply(anim){
   lbImg.style.transform = zs > 1.001 ? `translate(${ztx}px,${zty}px) scale(${zs})` : '';
   lbImg.style.cursor = zs > 1.001 ? 'zoom-out' : 'zoom-in';
 }
-function zReset(){ zs = 1; ztx = 0; zty = 0; zPinch = null; zDrag = null;
+function zReset(){ zs = 1; ztx = 0; zty = 0; zPinch = null; zDrag = null; zStart = null; zLastTap = 0;
   lbImg.style.transition = 'opacity .28s ease'; lbImg.style.transform = ''; lbImg.style.cursor = 'zoom-in'; }
 function tdist(e){ const a = e.touches[0], b = e.touches[1];
   return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); }
 
-lbImg.addEventListener('click', e => {
-  e.stopPropagation();
-  if (zGesture) { zGesture = false; return; }
+function zToggle(cx, cy){
   if (zs > 1.001) { zs = 1; ztx = zty = 0; }
   else {
     zs = 2.5;
     const r = lbImg.getBoundingClientRect();
-    ztx = (r.left + r.width / 2 - e.clientX) * (zs - 1);
-    zty = (r.top + r.height / 2 - e.clientY) * (zs - 1);
+    ztx = (r.left + r.width / 2 - cx) * (zs - 1);
+    zty = (r.top + r.height / 2 - cy) * (zs - 1);
   }
   zApply(true);
+}
+
+/* עכבר: לחיצה מגדילה ומקטינה. מגע מטופל בנפרד (touchend) כי preventDefault של הגרירה חוסם click */
+lbImg.addEventListener('click', e => {
+  e.stopPropagation();
+  if (zTouch) return;
+  if (zGesture) { zGesture = false; return; }
+  zToggle(e.clientX, e.clientY);
 });
 
 lbImg.addEventListener('touchstart', e => {
+  zTouch = true;
+  zMoved = false;
   if (e.touches.length === 2) {
     zGesture = true; zDrag = null;
     zPinch = { d: tdist(e), s: zs, tx: ztx, ty: zty };
     e.preventDefault();
   } else if (zs > 1.001) {
     zDrag = { x: e.touches[0].clientX - ztx, y: e.touches[0].clientY - zty };
+    zStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     e.preventDefault();
   } else {
     zGesture = false;
+    zStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }
 }, {passive: false});
 
@@ -550,14 +562,25 @@ lbImg.addEventListener('touchmove', e => {
     zty = e.touches[0].clientY - zDrag.y;
     zApply(false); e.preventDefault();
   }
+  if (zStart && e.touches.length === 1 &&
+      Math.hypot(e.touches[0].clientX - zStart.x, e.touches[0].clientY - zStart.y) > 12) zMoved = true;
 }, {passive: false});
 
 lbImg.addEventListener('touchend', e => {
+  const pinched = !!zPinch;
   if (zPinch && e.touches.length < 2) {
     zPinch = null;
     if (zs < 1.05) { zs = 1; ztx = zty = 0; zApply(true); }
   }
-  if (e.touches.length === 0) zDrag = null;
+  if (e.touches.length) return;
+  zDrag = null;
+  /* הקשה כפולה מגדילה — והקשה כפולה נוספת מקטינה חזרה */
+  if (!pinched && !zMoved && zStart) {
+    const t = e.timeStamp || 0;
+    if (t - zLastTap < 340) { zToggle(zStart.x, zStart.y); zLastTap = 0; }
+    else zLastTap = t;
+  }
+  zStart = null;
 });
 
 /* גרירה בעכבר כשמוגדל (דסקטופ) */
