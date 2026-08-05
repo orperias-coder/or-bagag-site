@@ -59,7 +59,38 @@ body::after{
     linear-gradient(15deg, rgba(14,13,11,.97) 12%, rgba(14,13,11,.45) 45%, rgba(14,13,11,.22) 100%),
     radial-gradient(80% 60% at 50% 100%, rgba(14,13,11,.9), transparent);
 }
-.hero-logo{width:min(300px,62vw);filter:drop-shadow(0 12px 40px rgba(0,0,0,.55));animation:rise 1.1s cubic-bezier(.19,1,.22,1) both}
+.hero-logo{width:min(300px,62vw);animation:rise 1.1s cubic-bezier(.19,1,.22,1) both}
+
+/* הילה מטושטשת שנמרחת ונעלמת — מבליטה את הלוגו השחור בלי מסגרת */
+.logo-halo{position:relative;display:inline-grid;place-items:center;padding:2.6rem 3rem}
+.logo-halo img{position:relative;z-index:1}
+.logo-halo::before{
+  content:"";position:absolute;inset:-14%;pointer-events:none;
+  backdrop-filter:blur(20px) brightness(1.5) saturate(.85);
+  -webkit-backdrop-filter:blur(20px) brightness(1.5) saturate(.85);
+  -webkit-mask-image:radial-gradient(ellipse 58% 55% at 50% 50%,#000 34%,rgba(0,0,0,.5) 60%,transparent 80%);
+  mask-image:radial-gradient(ellipse 58% 55% at 50% 50%,#000 34%,rgba(0,0,0,.5) 60%,transparent 80%);
+}
+.logo-halo::after{
+  content:"";position:absolute;inset:-14%;pointer-events:none;
+  background:radial-gradient(ellipse 56% 52% at 50% 47%,
+    rgba(253,249,240,.88) 0%,rgba(253,249,240,.66) 38%,
+    rgba(253,246,232,.28) 62%,rgba(253,246,232,.06) 76%,transparent 86%);
+}
+.hero-halo{margin-bottom:-.6rem;animation:rise 1.1s cubic-bezier(.19,1,.22,1) both}
+.hero-halo .hero-logo{animation:none}
+/* בסיום הדף הרקע שטוח וכהה — הילה חמה בלבד, בלי טשטוש שיוצר כתם אפור */
+.contact-halo{margin:0 auto .6rem;padding:2.1rem 2.4rem}
+.contact-halo::before{backdrop-filter:none;-webkit-backdrop-filter:none}
+.contact-halo::after{
+  inset:-12%;
+  background:
+    radial-gradient(ellipse 60% 56% at 50% 52%,
+      rgba(255,247,229,.94) 0%,rgba(255,243,215,.86) 42%,
+      rgba(255,226,150,.46) 64%,rgba(255,200,80,.12) 78%,transparent 90%),
+    radial-gradient(ellipse 82% 74% at 50% 52%,
+      rgba(255,180,40,.12) 0%,rgba(255,180,40,.04) 58%,transparent 84%);
+}
 .hero h1{
   font-family:'Frank Ruhl Libre',serif;font-weight:900;
   font-size:clamp(2.4rem,6.5vw,4.6rem);line-height:1.08;
@@ -183,7 +214,7 @@ section{padding:5rem 1.5rem}
 
 /* ---------- contact ---------- */
 #contact{text-align:center;padding-bottom:6rem}
-#contact .logo{width:170px;margin:0 auto 1.4rem;opacity:.95}
+#contact .logo{width:170px;margin:0;opacity:.95}
 #contact h2{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.5rem)}
 #contact .phone{
   display:block;font-family:'Frank Ruhl Libre',serif;font-weight:700;
@@ -220,7 +251,7 @@ section{padding:5rem 1.5rem}
 
 <header class="hero">
   <div class="hero-bg"><img src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/hero-16581114830f.webp" alt="" fetchpriority="high"></div>
-  <img class="hero-logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-white.png" alt="אור בגג">
+  <div class="logo-halo hero-halo"><img class="hero-logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-black.png" alt="אור בגג"></div>
   <h1>הגג שלכם, <em>ברמה אחרת</em></h1>
   <p class="sub">השבחת גגות רעפים · עבודות פח ומתכת · מרזבים · חיפויים · פאנל מבודד</p>
   <div class="hero-cta">
@@ -262,7 +293,7 @@ section{padding:5rem 1.5rem}
 
 <section id="contact">
   <div class="wrap rv">
-    <img class="logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-white.png" alt="">
+    <div class="logo-halo contact-halo"><img class="logo" src="https://cdn.jsdelivr.net/gh/orperias-coder/or-bagag-site@main/assets/logo-black.png" alt=""></div>
     <h2>מוזמנים לדבר איתי</h2>
     <a class="phone" href="tel:0545725681">054-5725681</a>
     <div class="hero-cta" style="margin-top:0">
