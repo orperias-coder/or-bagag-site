@@ -257,15 +257,15 @@ section{padding:5rem 1.5rem}
 /* ---------- שכבת-תנועה עדינה ("חי ונושם") ---------- */
 :root{--spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.19,1,.22,1)}
 .hero-bg{overflow:hidden}
-.hero-bg img{animation:drift 26s ease-in-out infinite alternate;transform-origin:32% 30%}
+.hero-bg img{animation:drift 26s ease-in-out infinite alternate;transform-origin:32% 30%;will-change:transform}
+.hero-bg.paused img{animation-play-state:paused}
 @keyframes drift{from{transform:scale(1.07) translate3d(0,0,0)}to{transform:scale(1) translate3d(-1.2%,.8%,0)}}
-.ph.pre{opacity:0;transform:translateY(24px) scale(.985)}
-.ph.pre.in{opacity:1;transform:none;transition:opacity .7s var(--ease-out) var(--d,0ms),transform .8s var(--ease-out) var(--d,0ms)}
+.ph.pre{opacity:0;transform:translate3d(0,18px,0)}
+.ph.pre.in{opacity:1;transform:none;transition:opacity .55s ease-out var(--d,0ms),transform .6s var(--ease-out) var(--d,0ms)}
 .ph.pop{animation:pop .55s var(--ease-out) var(--d,0ms) both}
-@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:none}}
 .btn,.chip,.socials a,.wa-float,.lb button{-webkit-tap-highlight-color:transparent}
 .btn:active,.chip:active,.socials a:active{transform:scale(.95);transition:transform .08s}
-.ph:active{transform:scale(.985);transition:transform .1s}
 .chip.on{animation:chipOn .38s var(--spring)}
 @keyframes chipOn{from{transform:scale(.9)}to{transform:scale(1)}}
 .wa-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:ring 4.5s ease-out 2s infinite;pointer-events:none}
@@ -513,22 +513,33 @@ ORDER.forEach(i => {
   masonry.appendChild(d);
 });
 
-/* ---- tiles: כניסה מדורגת כשהן נכנסות למסך ---- */
+/* ---- tiles: כניסה מדורגת כשהן נכנסות למסך (רק אחרי שהתמונה מוכנה — בלי קפיצות) ---- */
 const tileIO = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches
   ? new IntersectionObserver(es => {
       let k = 0;
       es.forEach(e => { if (!e.isIntersecting) return;
-        e.target.style.setProperty('--d', (k++ % 6) * 70 + 'ms');
-        e.target.classList.add('in'); tileIO.unobserve(e.target); });
-    }, {threshold:.08, rootMargin:'0px 0px -4% 0px'}) : null;
+        const el = e.target, img = el.querySelector('img'), d = (k++ % 4) * 60;
+        tileIO.unobserve(el);
+        const show = () => { el.style.setProperty('--d', d + 'ms'); el.classList.add('in'); };
+        if (img.complete) show();
+        else { img.addEventListener('load', show, {once:true}); img.addEventListener('error', show, {once:true}); setTimeout(show, 1500); }
+      });
+    }, {threshold:.05, rootMargin:'0px 0px 10% 0px'}) : null;
 if (tileIO) masonry.querySelectorAll('.ph').forEach(el => { el.classList.add('pre'); tileIO.observe(el); });
 function popVisible(){
-  let k = 0;
-  masonry.querySelectorAll('.ph:not(.hide)').forEach(el => {
-    el.classList.remove('pre','pop'); void el.offsetWidth;
-    if (k < 18) { el.style.setProperty('--d', k * 35 + 'ms'); el.classList.add('pop'); }
-    k++;
+  // מנפישים רק את מה שבמסך, ובלי למדוד כל אריח בנפרד (זה מה שתקע)
+  const vis = [...masonry.querySelectorAll('.ph:not(.hide)')];
+  vis.forEach(el => el.classList.remove('pre','pop'));
+  requestAnimationFrame(() => {
+    const H = innerHeight; let k = 0;
+    vis.forEach(el => { if (k >= 8) return; const r = el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < H) { el.style.setProperty('--d', k++ * 45 + 'ms'); el.classList.add('pop'); } });
   });
+}
+/* ---- הפתיח זז רק כשרואים אותו ---- */
+if ('IntersectionObserver' in window) {
+  const hb = document.querySelector('.hero-bg');
+  new IntersectionObserver(([e]) => hb.classList.toggle('paused', !e.isIntersecting)).observe(hb);
 }
 
 function updateCount(){
